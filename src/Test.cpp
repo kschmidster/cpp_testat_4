@@ -53,12 +53,9 @@ void test_at_func_lval() {
 }
 
 void test_at_func_const() {
-	using vec = dynArray<int>;
-	using const_reference = vec::const_reference;
-	vec test(4, 42);
-	vec const &test2 {test};
+	dynArray<int> const &test { 1, 3, 5, 42, 9 };
 
-	ASSERT_EQUAL(42, test2.at(3));
+	ASSERT_EQUAL(42, test.at(3));
 }
 
 void test_at_func_neg_index() {
@@ -84,6 +81,12 @@ void test_oper_sqr_brac_neg_index() {
 	ASSERT_EQUAL(42, test[-2]);
 }
 
+void test_oper_sqr_brac_const(){
+	dynArray<int> const &test { 1, 3, 7, 42, 9 };
+
+	ASSERT_EQUAL(42, test[3]);
+}
+
 void test_func_front() {
 	dynArray<double> test { 1.0, 2.0, 3.0, 4.0 };
 
@@ -98,6 +101,12 @@ void test_func_front_lval() {
 	ASSERT_EQUAL("hi", test.front());
 }
 
+void test_func_front_const(){
+	dynArray<double> const &test { 42.0, 2.0, 3.0, 4.0 };
+
+	ASSERT_EQUAL(42.0, test.front());
+}
+
 void test_func_back() {
 	dynArray<int> test { 1, 3, 5, 7, 9 };
 
@@ -110,6 +119,12 @@ void test_func_back_lval() {
 	test.back() = 42;
 
 	ASSERT_EQUAL(42, test.back());
+}
+
+void test_func_back_const(){
+	dynArray<std::string> const &test { "hello", "what's", "up" };
+
+	ASSERT_EQUAL("up", test.back());
 }
 
 void test_func_capacity() {
@@ -167,10 +182,13 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_at_func_neg_index));
 	s.push_back(CUTE(test_oper_sqr_brac_lval));
 	s.push_back(CUTE(test_oper_sqr_brac_neg_index));
+	s.push_back(CUTE(test_oper_sqr_brac_const));
 	s.push_back(CUTE(test_func_front));
 	s.push_back(CUTE(test_func_front_lval));
+	s.push_back(CUTE(test_func_front_const));
 	s.push_back(CUTE(test_func_back));
 	s.push_back(CUTE(test_func_back_lval));
+	s.push_back(CUTE(test_func_back_const));
 	s.push_back(CUTE(test_func_capacity));
 	s.push_back(CUTE(test_func_clear));
 	s.push_back(CUTE(test_func_push_back));

@@ -1,5 +1,5 @@
 <testsuites>
-	<testsuite name="AllTests" tests="18">
+	<testsuite name="AllTests" tests="21">
 		<testcase classname="AllTests" name="test_create_dyArray_no_args"/>
 		<testcase classname="AllTests" name="test_create_dyArray_init_list"/>
 		<testcase classname="AllTests" name="test_create_dyArray_eql_val"/>
@@ -10,10 +10,13 @@
 		<testcase classname="AllTests" name="test_at_func_neg_index"/>
 		<testcase classname="AllTests" name="test_oper_sqr_brac_lval"/>
 		<testcase classname="AllTests" name="test_oper_sqr_brac_neg_index"/>
+		<testcase classname="AllTests" name="test_oper_sqr_brac_const"/>
 		<testcase classname="AllTests" name="test_func_front"/>
 		<testcase classname="AllTests" name="test_func_front_lval"/>
+		<testcase classname="AllTests" name="test_func_front_const"/>
 		<testcase classname="AllTests" name="test_func_back"/>
 		<testcase classname="AllTests" name="test_func_back_lval"/>
+		<testcase classname="AllTests" name="test_func_back_const"/>
 		<testcase classname="AllTests" name="test_func_capacity"/>
 		<testcase classname="AllTests" name="test_func_clear"/>
 		<testcase classname="AllTests" name="test_func_push_back"/>
