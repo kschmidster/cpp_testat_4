@@ -52,7 +52,16 @@ void test_at_func_lval() {
 	ASSERT_EQUAL(2.78, test.at(2));
 }
 
-void test_at_func_neg_index(){
+void test_at_func_const() {
+	using vec = dynArray<int>;
+	using const_reference = vec::const_reference;
+	vec test(4, 42);
+	vec const &test2 {test};
+
+	ASSERT_EQUAL(42, test2.at(3));
+}
+
+void test_at_func_neg_index() {
 	dynArray<std::string> test { "this", "is", "a", "test" };
 
 	ASSERT_EQUAL("test", test.at(-1));
@@ -64,7 +73,7 @@ void test_at_func_neg_index(){
 void test_oper_sqr_brac_lval() {
 	dynArray<std::string> test { "hello this is a text" };
 
-	test[test.size()-1] = "test";
+	test[test.size() - 1] = "test";
 
 	ASSERT_EQUAL("test", test[test.size() - 1]);
 }
@@ -121,8 +130,8 @@ void test_func_clear() {
 	ASSERT_EQUAL(4, test.capacity());
 }
 
-void test_func_push_back(){
-	dynArray<std::string> test {"hallo"};
+void test_func_push_back() {
+	dynArray<std::string> test { "hallo" };
 
 	test.push_back("this");
 	test.push_back("is");
@@ -134,9 +143,9 @@ void test_func_push_back(){
 	ASSERT_EQUAL("hallo", test.at(-4));
 }
 
-void test_func_pop_back(){
+void test_func_pop_back() {
 	using pair = std::pair<int, std::string>;
-	dynArray<pair> test { { 3, "3"}, {5, "5"}, { 7, "7"} };
+	dynArray<pair> test { { 3, "3" }, { 5, "5" }, { 7, "7" } };
 
 	test.pop_back();
 
@@ -154,6 +163,7 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_create_dyArray_istr_iter));
 	s.push_back(CUTE(test_at_func));
 	s.push_back(CUTE(test_at_func_lval));
+	s.push_back(CUTE(test_at_func_const));
 	s.push_back(CUTE(test_at_func_neg_index));
 	s.push_back(CUTE(test_oper_sqr_brac_lval));
 	s.push_back(CUTE(test_oper_sqr_brac_neg_index));

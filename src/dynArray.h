@@ -4,31 +4,27 @@
 #include <vector>
 #include <iterator>
 
+#include <iostream>
+
 template<typename T>
-class dynArray {
-	using value_type = T;
-	using reference = value_type&;
-	using const_reference =  const value_type&;
-	using vec = std::vector<value_type>;
-	using size_type = typename vec::size_type;
-	using iterator = typename vec::iterator;
-	using const_iterator = typename vec::const_iterator;
-	using reverse_iterator = typename vec::reverse_iterator;
-	using const_reverse_iterator = typename vec::const_reverse_iterator;
+struct dynArray {
+	using vector = std::vector<T>;
+	using value_type = typename vector::value_type;
+	using reference = typename vector::reference;
+	using const_reference = typename vector::const_reference;
+	using size_type = typename vector::size_type;
+	using iterator = typename vector::iterator;
+	using const_iterator = typename vector::const_iterator;
+	using reverse_iterator = typename vector::reverse_iterator;
+	using const_reverse_iterator = typename vector::const_reverse_iterator;
 
-	vec myArray;
 
-public:
 	//ctor
 	dynArray() : myArray { } { }
-	dynArray(std::initializer_list<value_type> list) : myArray { } {
-			myArray.insert(myArray.cend(), list.begin(), list.end());
-	}
-	dynArray(size_type size, const_reference value) : myArray { } {
-		myArray.insert(myArray.cbegin(), size, value);
-	}
-	dynArray(std::istream_iterator<value_type> begin, std::istream_iterator<value_type> end) :
-		myArray { begin, end } { }
+	dynArray(std::initializer_list<value_type> list) : myArray { list } { }
+	dynArray(size_type size, const_reference value) : myArray (size, value) { }
+	dynArray(std::istream_iterator<value_type> begin, std::istream_iterator<value_type> end)
+		: myArray { begin, end } { }
 
 	//access
 	reference at(int index) {
@@ -121,6 +117,10 @@ public:
 	static dynArray<value_type>& makedynArray(std::initializer_list<value_type> list) {
 		return dynArray { list };
 	}
+
+private:
+	vector myArray;
+
 };
 
 #endif /* DYNARRAY_H_ */

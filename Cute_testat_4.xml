@@ -1,11 +1,12 @@
 <testsuites>
-	<testsuite name="AllTests" tests="17">
+	<testsuite name="AllTests" tests="18">
 		<testcase classname="AllTests" name="test_create_dyArray_no_args"/>
 		<testcase classname="AllTests" name="test_create_dyArray_init_list"/>
 		<testcase classname="AllTests" name="test_create_dyArray_eql_val"/>
 		<testcase classname="AllTests" name="test_create_dyArray_istr_iter"/>
 		<testcase classname="AllTests" name="test_at_func"/>
 		<testcase classname="AllTests" name="test_at_func_lval"/>
+		<testcase classname="AllTests" name="test_at_func_const"/>
 		<testcase classname="AllTests" name="test_at_func_neg_index"/>
 		<testcase classname="AllTests" name="test_oper_sqr_brac_lval"/>
 		<testcase classname="AllTests" name="test_oper_sqr_brac_neg_index"/>
