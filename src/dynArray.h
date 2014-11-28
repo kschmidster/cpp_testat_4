@@ -24,7 +24,7 @@ public:
 	dynArray(std::initializer_list<value_type> list) : myArray { } {
 			myArray.insert(myArray.cend(), list.begin(), list.end());
 	}
-	dynArray(size_type size, value_type const &value) : myArray { } {
+	dynArray(size_type size, const_reference value) : myArray { } {
 		myArray.insert(myArray.cbegin(), size, value);
 	}
 	dynArray(std::istream_iterator<value_type> begin, std::istream_iterator<value_type> end) :
