@@ -302,7 +302,7 @@ void test_func_erase_two_const_iter() {
 }
 
 void test_make_dynArray(){
-	dynArray<std::string> test = dynArray<std::string>::makedynArray("actually", "this", "is", "my", "last", "test");
+//	dynArray<std::string> test = dynArray<std::string>::makedynArray("actually", "this", "is", "my", "last", "test");
 }
 
 void runAllTests(int argc, char const *argv[]) {
