@@ -5,6 +5,8 @@
 
 #include "dynArray.h"
 
+#include <numeric>
+
 void test_create_dyArray_no_args() {
 	dynArray<int> test1 { };
 	dynArray<char> test2 { };
@@ -81,7 +83,7 @@ void test_oper_sqr_brac_neg_index() {
 	ASSERT_EQUAL(42, test[-2]);
 }
 
-void test_oper_sqr_brac_const(){
+void test_oper_sqr_brac_const() {
 	dynArray<int> const &test { 1, 3, 7, 42, 9 };
 
 	ASSERT_EQUAL(42, test[3]);
@@ -101,7 +103,7 @@ void test_func_front_lval() {
 	ASSERT_EQUAL("hi", test.front());
 }
 
-void test_func_front_const(){
+void test_func_front_const() {
 	dynArray<double> const &test { 42.0, 2.0, 3.0, 4.0 };
 
 	ASSERT_EQUAL(42.0, test.front());
@@ -121,7 +123,7 @@ void test_func_back_lval() {
 	ASSERT_EQUAL(42, test.back());
 }
 
-void test_func_back_const(){
+void test_func_back_const() {
 	dynArray<std::string> const &test { "hello", "what's", "up" };
 
 	ASSERT_EQUAL("up", test.back());
@@ -168,7 +170,7 @@ void test_func_pop_back() {
 	ASSERT_EQUAL(3, test.capacity());
 }
 
-void test_func_resize_bigger(){
+void test_func_resize_bigger() {
 	using pair = std::pair<int, std::string>;
 	dynArray<pair> test { { 3, "3" }, { 5, "5" }, { 7, "7" } };
 
@@ -177,7 +179,7 @@ void test_func_resize_bigger(){
 	ASSERT_EQUAL(5, test.size());
 }
 
-void test_func_resize_smaller(){
+void test_func_resize_smaller() {
 	dynArray<int> test { 7, 5, 3, 1 };
 
 	test.resize(3);
@@ -185,12 +187,122 @@ void test_func_resize_smaller(){
 	ASSERT_EQUAL(3, test.size());
 }
 
-void test_func_resize_values(){
+void test_func_resize_values() {
 	dynArray<double> test { 1.0, 2.0, 3.0, 4.0 };
 
 	test.resize(7, 42.0);
 
 	ASSERT_EQUAL(7, test.size());
+}
+
+void test_rand_acc_iter() {
+	std::ostringstream out { };
+	std::ostream_iterator<std::string> out_iter(out, " ");
+	dynArray<std::string> test { "the", "answer", "is", "42" };
+
+	std::copy(test.begin(), test.end(), out_iter);
+
+	ASSERT_EQUAL("the answer is 42 ", out.str());
+}
+
+void test_rand_acc_iter_const() {
+	std::ostringstream out { };
+	std::ostream_iterator<std::string> out_iter(out, " ");
+	dynArray<std::string> const &test { "42", "is", "always", "the", "answer" };
+
+	std::copy(test.begin(), test.end(), out_iter);
+
+	ASSERT_EQUAL("42 is always the answer ", out.str());
+}
+
+void test_const_rand_acc_iter_const() {
+	dynArray<int> const &test { 1, 2, 3, 4, 5, 6, 7, 8, 6 };
+
+	int erg { std::accumulate(test.cbegin(), test.cend(), 0) };
+
+	ASSERT_EQUAL(42, erg);
+}
+
+void test_rev_iter() {
+	std::ostringstream out { };
+	std::ostream_iterator<char> out_iter(out, "");
+	dynArray<char> test { 't', 's', 'e', 't' };
+
+	std::copy(test.rbegin(), test.rend(), out_iter);
+
+	ASSERT_EQUAL("test", out.str());
+}
+
+void test_rev_iter_const() {
+	std::ostringstream out { };
+	std::ostream_iterator<int> out_iter(out, "");
+	dynArray<int> const &test { 2, 4 };
+
+	std::copy(test.rbegin(), test.rend(), out_iter);
+
+	ASSERT_EQUAL("42", out.str());
+}
+
+void test_const_rev_iter_const() {
+	std::ostringstream out { };
+	std::ostream_iterator<int> out_iter(out, " ");
+	dynArray<int> test { 13, 8, 5, 3, 2, 1, 1 };
+
+	std::copy(test.crbegin(), test.crend(), out_iter);
+
+	ASSERT_EQUAL("1 1 2 3 5 8 13 ", out.str());
+}
+
+void test_func_erase() {
+	std::ostringstream out { };
+	std::ostream_iterator<std::string> out_iter(out, " ");
+	dynArray<std::string> test { "this", "lköhjasf", "is", "a test" };
+
+	test.erase(test.begin() + 1);
+
+	std::copy(test.begin(), test.end(), out_iter);
+
+	ASSERT_EQUAL("this is a test ", out.str());
+}
+
+void test_func_erase_cont_iter() {
+	std::ostringstream out { };
+	std::ostream_iterator<int> out_iter(out, "");
+	dynArray<int> test { 4, 3, 2, 1 };
+
+	test.erase(test.erase(test.cbegin() + 1) + 1);
+
+	std::copy(test.begin(), test.end(), out_iter);
+
+	ASSERT_EQUAL("42", out.str());
+}
+
+void test_func_erase_two_iter() {
+	std::ostringstream out { };
+	std::ostream_iterator<std::string> out_iter(out, " ");
+	dynArray<std::string> test { "this", "is", "a", "test", "this", "will", "be", "erased" };
+
+	test.erase(test.begin() + 4, test.end());
+
+	std::copy(test.begin(), test.end(), out_iter);
+
+	ASSERT_EQUAL("this is a test ", out.str());
+}
+
+void test_func_erase_two_const_iter() {
+	std::ostringstream out { };
+	std::ostream_iterator<std::string> out_iter(out, " ");
+	dynArray<std::string> test { "this", "will", "be", "erased", "this", "is", "my", "last", "test" };
+
+	test.erase(test.begin(), test.begin() + 4);
+
+	std::copy(test.begin(), test.end(), out_iter);
+
+	ASSERT_EQUAL("this is my last test ", out.str());
+}
+
+void test_make_dynArray(){
+	dynArray<std::string> test = dynArray<std::string>::makedynArray("actually", "this", "is", "my", "last", "test");
 }
 
 void runAllTests(int argc, char const *argv[]) {
@@ -221,6 +333,17 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_func_resize_bigger));
 	s.push_back(CUTE(test_func_resize_smaller));
 	s.push_back(CUTE(test_func_resize_values));
+	s.push_back(CUTE(test_rand_acc_iter));
+	s.push_back(CUTE(test_rand_acc_iter_const));
+	s.push_back(CUTE(test_const_rand_acc_iter_const));
+	s.push_back(CUTE(test_rev_iter));
+	s.push_back(CUTE(test_rev_iter_const));
+	s.push_back(CUTE(test_const_rev_iter_const));
+	s.push_back(CUTE(test_func_erase));
+	s.push_back(CUTE(test_func_erase_cont_iter));
+	s.push_back(CUTE(test_func_erase_two_iter));
+	s.push_back(CUTE(test_func_erase_two_const_iter));
+	s.push_back(CUTE(test_make_dynArray));
 
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);

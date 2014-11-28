@@ -4,8 +4,6 @@
 #include <vector>
 #include <iterator>
 
-#include <iostream>
-
 template<typename T>
 struct dynArray {
 	using vector = std::vector<T>;
@@ -111,13 +109,15 @@ struct dynArray {
 		myArray.resize(count, value);
 	}
 
-	static dynArray<value_type>& makedynArray(std::initializer_list<value_type> list) {
-		return dynArray { list };
-	}
+	static dynArray<T>& makedynArray(std::initializer_list<T> list);
 
 private:
 	vector myArray;
-
 };
+
+template<typename T>
+inline dynArray<T>& dynArray<T>::makedynArray(std::initializer_list<T> list) {
+	return dynArray<T> { list };
+}
 
 #endif /* DYNARRAY_H_ */
