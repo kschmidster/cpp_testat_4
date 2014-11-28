@@ -1,5 +1,5 @@
 <testsuites>
-	<testsuite name="AllTests" tests="21">
+	<testsuite name="AllTests" tests="24">
 		<testcase classname="AllTests" name="test_create_dyArray_no_args"/>
 		<testcase classname="AllTests" name="test_create_dyArray_init_list"/>
 		<testcase classname="AllTests" name="test_create_dyArray_eql_val"/>
@@ -21,5 +21,8 @@
 		<testcase classname="AllTests" name="test_func_clear"/>
 		<testcase classname="AllTests" name="test_func_push_back"/>
 		<testcase classname="AllTests" name="test_func_pop_back"/>
+		<testcase classname="AllTests" name="test_func_resize_bigger"/>
+		<testcase classname="AllTests" name="test_func_resize_smaller"/>
+		<testcase classname="AllTests" name="test_func_resize_values"/>
 	</testsuite>
 </testsuites>

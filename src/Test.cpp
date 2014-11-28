@@ -168,6 +168,31 @@ void test_func_pop_back() {
 	ASSERT_EQUAL(3, test.capacity());
 }
 
+void test_func_resize_bigger(){
+	using pair = std::pair<int, std::string>;
+	dynArray<pair> test { { 3, "3" }, { 5, "5" }, { 7, "7" } };
+
+	test.resize(5);
+
+	ASSERT_EQUAL(5, test.size());
+}
+
+void test_func_resize_smaller(){
+	dynArray<int> test { 7, 5, 3, 1 };
+
+	test.resize(3);
+
+	ASSERT_EQUAL(3, test.size());
+}
+
+void test_func_resize_values(){
+	dynArray<double> test { 1.0, 2.0, 3.0, 4.0 };
+
+	test.resize(7, 42.0);
+
+	ASSERT_EQUAL(7, test.size());
+}
+
 void runAllTests(int argc, char const *argv[]) {
 	cute::suite s { };
 
@@ -193,6 +218,9 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_func_clear));
 	s.push_back(CUTE(test_func_push_back));
 	s.push_back(CUTE(test_func_pop_back));
+	s.push_back(CUTE(test_func_resize_bigger));
+	s.push_back(CUTE(test_func_resize_smaller));
+	s.push_back(CUTE(test_func_resize_values));
 
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<> > lis(xmlfile.out);

@@ -106,9 +106,6 @@ struct dynArray {
 	}
 	void push_back(const_reference value) { myArray.push_back(value); }
 	void pop_back() { myArray.pop_back(); }
-	void resize(size_type count, value_type value = value_type()) {
-		myArray.resize(count, value);
-	}
 	void resize(size_type count) { myArray.resize(count); }
 	void resize(size_type count, const_reference value) {
 		myArray.resize(count, value);
