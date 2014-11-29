@@ -1,5 +1,5 @@
 <testsuites>
-	<testsuite name="AllTests" tests="34">
+	<testsuite name="AllTests" tests="35">
 		<testcase classname="AllTests" name="test_create_dyArray_no_args"/>
 		<testcase classname="AllTests" name="test_create_dyArray_init_list"/>
 		<testcase classname="AllTests" name="test_create_dyArray_eql_val"/>
@@ -34,5 +34,6 @@
 		<testcase classname="AllTests" name="test_func_erase_cont_iter"/>
 		<testcase classname="AllTests" name="test_func_erase_two_iter"/>
 		<testcase classname="AllTests" name="test_func_erase_two_const_iter"/>
+		<testcase classname="AllTests" name="test_make_dynArray"/>
 	</testsuite>
 </testsuites>

@@ -292,17 +292,23 @@ void test_func_erase_two_iter() {
 void test_func_erase_two_const_iter() {
 	std::ostringstream out { };
 	std::ostream_iterator<std::string> out_iter(out, " ");
-	dynArray<std::string> test { "this", "will", "be", "erased", "this", "is", "my", "last", "test" };
+	dynArray<std::string> test { "this", "will", "be", "erased", "this", "is", "another", "test" };
 
 	test.erase(test.begin(), test.begin() + 4);
 
 	std::copy(test.begin(), test.end(), out_iter);
 
-	ASSERT_EQUAL("this is my last test ", out.str());
+	ASSERT_EQUAL("this is another test ", out.str());
 }
 
 void test_make_dynArray(){
-//	dynArray<std::string> test = dynArray<std::string>::makedynArray("actually", "this", "is", "my", "last", "test");
+	std::ostringstream out { };
+	std::ostream_iterator<std::string> out_iter(out, " ");
+	auto test = dynArray<std::string>::makedynArray( { "this", "is", "my", "last", "test" } );
+
+	std::copy(test.begin(), test.end(), out_iter);
+
+	ASSERT_EQUAL("this is my last test ", out.str());
 }
 
 void runAllTests(int argc, char const *argv[]) {

@@ -7,6 +7,8 @@
 template<typename T>
 struct dynArray {
 	using vector = std::vector<T>;
+	using reference_vector = std::vector<T>&;
+	using const_reference_vector = const std::vector<T>&;
 	using value_type = typename vector::value_type;
 	using reference = typename vector::reference;
 	using const_reference = typename vector::const_reference;
@@ -21,6 +23,7 @@ struct dynArray {
 	dynArray() : myArray { } { }
 	dynArray(std::initializer_list<value_type> list) : myArray { list } { }
 	dynArray(size_type size, const_reference value) : myArray (size, value) { }
+	//TODO check implenentation
 	dynArray(std::istream_iterator<value_type> begin, std::istream_iterator<value_type> end)
 		: myArray { begin, end } { }
 
@@ -109,15 +112,12 @@ struct dynArray {
 		myArray.resize(count, value);
 	}
 
-	static dynArray<T>& makedynArray(std::initializer_list<T> list);
+	static dynArray<value_type> makedynArray(std::initializer_list<value_type> list) {
+			return dynArray<value_type> { list };
+	}
 
 private:
 	vector myArray;
 };
-
-template<typename T>
-inline dynArray<T>& dynArray<T>::makedynArray(std::initializer_list<T> list) {
-	return dynArray<T> { list };
-}
 
 #endif /* DYNARRAY_H_ */
