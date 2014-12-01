@@ -7,8 +7,6 @@
 template<typename T>
 struct dynArray {
 	using vector = std::vector<T>;
-	using reference_vector = std::vector<T>&;
-	using const_reference_vector = const std::vector<T>&;
 	using value_type = typename vector::value_type;
 	using reference = typename vector::reference;
 	using const_reference = typename vector::const_reference;
