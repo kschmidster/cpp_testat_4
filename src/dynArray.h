@@ -16,7 +16,6 @@ struct dynArray {
 	using reverse_iterator = typename vector::reverse_iterator;
 	using const_reverse_iterator = typename vector::const_reverse_iterator;
 
-
 	//ctor
 	dynArray() : myArray { } { }
 	dynArray(std::initializer_list<value_type> list) : myArray { list } { }
@@ -47,9 +46,9 @@ struct dynArray {
 	reference operator[](int index) {
 		//TODO check implementation
 		if (index >= 0) {
-			return reference { myArray.at(index) };
+			return reference { myArray[index] };
 		} else {
-			return reference { myArray.at(myArray.size() + index) };
+			return reference { myArray[myArray.size() + index] };
 		}
 	}
 
