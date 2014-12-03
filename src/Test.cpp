@@ -40,6 +40,13 @@ void test_create_dyArray_istr_iter() {
 	ASSERT_EQUAL(5, test.size());
 }
 
+void test_create_dynArray_iter() {
+	std::vector<char> test_vec { '1', '2', '3' };
+	dynArray<char> test { test_vec.begin(), test_vec.end() };
+
+	ASSERT_EQUAL(3, test.size());
+}
+
 void test_at_func() {
 	dynArray<int> test(3, 42);
 
@@ -301,10 +308,10 @@ void test_func_erase_two_const_iter() {
 	ASSERT_EQUAL("this is another test ", out.str());
 }
 
-void test_make_dynArray(){
+void test_make_dynArray() {
 	std::ostringstream out { };
 	std::ostream_iterator<std::string> out_iter(out, " ");
-	auto test = dynArray<std::string>::makedynArray( { "this", "is", "my", "last", "test" } );
+	auto test = dynArray<std::string>::makedynArray( { "this", "is", "my", "last", "test" });
 
 	std::copy(test.begin(), test.end(), out_iter);
 
@@ -319,6 +326,7 @@ void runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(test_create_dyArray_init_list));
 	s.push_back(CUTE(test_create_dyArray_eql_val));
 	s.push_back(CUTE(test_create_dyArray_istr_iter));
+	s.push_back(CUTE(test_create_dynArray_iter));
 	s.push_back(CUTE(test_at_func));
 	s.push_back(CUTE(test_at_func_lval));
 	s.push_back(CUTE(test_at_func_const));

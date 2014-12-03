@@ -15,14 +15,16 @@ struct dynArray {
 	using const_iterator = typename vector::const_iterator;
 	using reverse_iterator = typename vector::reverse_iterator;
 	using const_reverse_iterator = typename vector::const_reverse_iterator;
+	using istream_iterator = std::istream_iterator<value_type>;
+	using initializer_list = std::initializer_list<value_type>;
 
 	//ctor
 	dynArray() : myArray { } { }
-	dynArray(std::initializer_list<value_type> list) : myArray { list } { }
-	dynArray(size_type size, const_reference value) : myArray (size, value) { }
+	dynArray(initializer_list list) : myArray { list } { }
+	explicit dynArray(size_type size, const_reference value) : myArray (size, value) { }
 	//TODO check implenentation
-	dynArray(std::istream_iterator<value_type> begin, std::istream_iterator<value_type> end)
-		: myArray { begin, end } { }
+	dynArray(istream_iterator begin, istream_iterator end) : myArray { begin, end } { }
+	dynArray(const_iterator begin, const_iterator end) : myArray { begin, end } { }
 
 	//access
 	reference at(int index) {
@@ -73,7 +75,7 @@ struct dynArray {
 		return const_reference { myArray.back() };
 	}
 
-	//Iterators TODO check iterator
+	//Iterators
 	iterator begin() noexcept { return myArray.begin(); }
 	const_iterator begin() const noexcept { return myArray.begin(); }
 	const_iterator cbegin() const noexcept { return myArray.cbegin(); }
@@ -92,7 +94,7 @@ struct dynArray {
 	size_type size() const noexcept { return myArray.size(); }
 	size_type capacity() const noexcept { return myArray.capacity(); }
 
-	//Modifiers TODO check iterator
+	//Modifiers
 	void clear() noexcept { myArray.clear(); }
 	iterator erase(iterator pos) { return myArray.erase(pos); }
 	const_iterator erase(const_iterator pos) { return myArray.erase(pos); }
@@ -109,8 +111,8 @@ struct dynArray {
 		myArray.resize(count, value);
 	}
 
-	static dynArray<value_type> makedynArray(std::initializer_list<value_type> list) {
-			return dynArray<value_type> { list };
+	static dynArray<value_type> makedynArray(initializer_list list) {
+		return dynArray<value_type> { list };
 	}
 
 private:
