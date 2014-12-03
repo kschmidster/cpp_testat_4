@@ -21,7 +21,7 @@ struct dynArray {
 	//ctor
 	dynArray() : myArray { } { }
 	dynArray(initializer_list list) : myArray { list } { }
-	explicit dynArray(size_type size, const_reference value) : myArray (size, value) { }
+	dynArray(size_type size, const_reference value) : myArray (size, value) { }
 	//TODO check implenentation
 	dynArray(istream_iterator begin, istream_iterator end) : myArray { begin, end } { }
 	dynArray(const_iterator begin, const_iterator end) : myArray { begin, end } { }
