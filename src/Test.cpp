@@ -35,8 +35,7 @@ void test_create_dyArray_istr_iter() {
 	std::istringstream in { "bla bla just some text..." };
 	std::istringstream end { };
 	using it = std::istream_iterator<std::string>;
-	it stringItr { in };
-	dynArray<std::string> test { stringItr, it { } };
+	dynArray<std::string> test { it { in }, it { } };
 
 	ASSERT(!test.empty());
 	ASSERT_EQUAL(5, test.size());
