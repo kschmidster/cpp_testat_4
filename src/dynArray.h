@@ -2,7 +2,6 @@
 #define DYNARRAY_H_
 
 #include <vector>
-#include <iterator>
 
 template<typename T>
 struct dynArray {
@@ -22,13 +21,11 @@ struct dynArray {
 	dynArray() : myArray { } { }
 	dynArray(initializer_list list) : myArray { list } { }
 	dynArray(size_type size, const_reference value) : myArray (size, value) { }
-	//TODO check implenentation
-	dynArray(istream_iterator begin, istream_iterator end) : myArray { begin, end } { }
-	dynArray(const_iterator begin, const_iterator end) : myArray { begin, end } { }
+	template<typename Iter>
+	dynArray(Iter begin, Iter end) : myArray (begin, end) { }
 
 	//access
 	reference at(int index) {
-		//TODO check implementation
 		if (index >= 0) {
 			return myArray.at(index);
 		} else {
@@ -37,25 +34,22 @@ struct dynArray {
 	}
 
 	const_reference at(int index) const {
-		//TODO check implementation
 		if (index >= 0) {
-			return const_reference { myArray.at(index) };
+			return myArray.at(index);
 		} else {
-			return const_reference { myArray.at(myArray.size() + index) };
+			return myArray.at(myArray.size() + index);
 		}
 	}
 
 	reference operator[](int index) {
-		//TODO check implementation
 		if (index >= 0) {
-			return reference { myArray[index] };
+			return myArray[index];
 		} else {
-			return reference { myArray[myArray.size() + index] };
+			return myArray[myArray.size() + index];
 		}
 	}
 
 	const_reference operator[](int index) const {
-		//TODO check implementation
 		if (index >= 0) {
 			return myArray[index];
 		} else {
