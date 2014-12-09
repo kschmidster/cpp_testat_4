@@ -23,33 +23,14 @@ struct dynArray {
 	dynArray(Iter begin, Iter end) : myArray (begin, end) { }
 
 	//access
-	reference at(int index) {
-		return myArray.at(right_index(index));
-	}
-
-	const_reference at(int index) const {
-		return myArray.at(right_index(index));
-	}
-
-	reference operator[](int index) {
-		return this->at(index);
-	}
-
-	const_reference operator[](int index) const {
-		return this->at(index);
-	}
-
+	reference at(int index) { return myArray.at(right_index(index)); }
+	const_reference at(int index) const { return myArray.at(right_index(index)); }
+	reference operator[](int index) { return this->at(index); }
+	const_reference operator[](int index) const { return this->at(index); }
 	reference front() { return myArray.front(); }
-
-	const_reference front() const {
-		return myArray.front();
-	}
-
+	const_reference front() const { return myArray.front(); }
 	reference back() { return myArray.back(); }
-
-	const_reference back() const {
-		return myArray.back();
-	}
+	const_reference back() const { return myArray.back(); }
 
 	//Iterators
 	iterator begin() noexcept { return myArray.begin(); }
@@ -87,6 +68,7 @@ struct dynArray {
 		myArray.resize(count, value);
 	}
 
+	// factory function
 	static dynArray<value_type> makedynArray(std::initializer_list<value_type> list) {
 		return dynArray<value_type> { list };
 	}
