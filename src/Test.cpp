@@ -63,7 +63,7 @@ void test_at_func_lval() {
 }
 
 void test_at_func_const() {
-	dynArray<int> const &test { 1, 3, 5, 42, 9 };
+	dynArray<int> const test { 1, 3, 5, 42, 9 };
 
 	ASSERT_EQUAL(42, test.at(3));
 }
@@ -92,7 +92,7 @@ void test_oper_sqr_brac_neg_index() {
 }
 
 void test_oper_sqr_brac_const() {
-	dynArray<int> const &test { 1, 3, 7, 42, 9 };
+	dynArray<int> const test { 1, 3, 7, 42, 9 };
 
 	ASSERT_EQUAL(42, test[3]);
 }
@@ -112,7 +112,7 @@ void test_func_front_lval() {
 }
 
 void test_func_front_const() {
-	dynArray<double> const &test { 42.0, 2.0, 3.0, 4.0 };
+	dynArray<double> const test { 42.0, 2.0, 3.0, 4.0 };
 
 	ASSERT_EQUAL(42.0, test.front());
 }
@@ -132,7 +132,7 @@ void test_func_back_lval() {
 }
 
 void test_func_back_const() {
-	dynArray<std::string> const &test { "hello", "what's", "up" };
+	dynArray<std::string> const test { "hello", "what's", "up" };
 
 	ASSERT_EQUAL("up", test.back());
 }
@@ -216,7 +216,7 @@ void test_rand_acc_iter() {
 void test_rand_acc_iter_const() {
 	std::ostringstream out { };
 	std::ostream_iterator<std::string> out_iter(out, " ");
-	dynArray<std::string> const &test { "42", "is", "always", "the", "answer" };
+	dynArray<std::string> const test { "42", "is", "always", "the", "answer" };
 
 	std::copy(test.begin(), test.end(), out_iter);
 
@@ -224,7 +224,7 @@ void test_rand_acc_iter_const() {
 }
 
 void test_const_rand_acc_iter_const() {
-	dynArray<int> const &test { 1, 2, 3, 4, 5, 6, 7, 8, 6 };
+	dynArray<int> const test { 1, 2, 3, 4, 5, 6, 7, 8, 6 };
 
 	int erg { std::accumulate(test.cbegin(), test.cend(), 0) };
 
@@ -244,7 +244,7 @@ void test_rev_iter() {
 void test_rev_iter_const() {
 	std::ostringstream out { };
 	std::ostream_iterator<int> out_iter(out, "");
-	dynArray<int> const &test { 2, 4 };
+	dynArray<int> const test { 2, 4 };
 
 	std::copy(test.rbegin(), test.rend(), out_iter);
 

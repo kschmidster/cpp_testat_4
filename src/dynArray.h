@@ -14,47 +14,29 @@ struct dynArray {
 	using const_iterator = typename vector::const_iterator;
 	using reverse_iterator = typename vector::reverse_iterator;
 	using const_reverse_iterator = typename vector::const_reverse_iterator;
-	using istream_iterator = std::istream_iterator<value_type>;
-	using initializer_list = std::initializer_list<value_type>;
 
 	//ctor
 	dynArray() : myArray { } { }
-	dynArray(initializer_list list) : myArray { list } { }
+	dynArray(std::initializer_list<value_type> list) : myArray { list } { }
 	dynArray(size_type size, const_reference value) : myArray (size, value) { }
 	template<typename Iter>
 	dynArray(Iter begin, Iter end) : myArray (begin, end) { }
 
 	//access
 	reference at(int index) {
-		if (index >= 0) {
-			return myArray.at(index);
-		} else {
-			return myArray.at(myArray.size() + index);
-		}
+		return myArray.at(right_index(index));
 	}
 
 	const_reference at(int index) const {
-		if (index >= 0) {
-			return myArray.at(index);
-		} else {
-			return myArray.at(myArray.size() + index);
-		}
+		return myArray.at(right_index(index));
 	}
 
 	reference operator[](int index) {
-		if (index >= 0) {
-			return myArray[index];
-		} else {
-			return myArray[myArray.size() + index];
-		}
+		return this->at(index);
 	}
 
 	const_reference operator[](int index) const {
-		if (index >= 0) {
-			return myArray[index];
-		} else {
-			return myArray[myArray.size() + index];
-		}
+		return this->at(index);
 	}
 
 	reference front() { return myArray.front(); }
@@ -105,12 +87,16 @@ struct dynArray {
 		myArray.resize(count, value);
 	}
 
-	static dynArray<value_type> makedynArray(initializer_list list) {
+	static dynArray<value_type> makedynArray(std::initializer_list<value_type> list) {
 		return dynArray<value_type> { list };
 	}
 
 private:
 	vector myArray;
+
+	size_type right_index(int index) const {
+		return index < 0 ? myArray.size() + index : index;
+	}
 };
 
 #endif /* DYNARRAY_H_ */
