@@ -60,13 +60,13 @@ struct dynArray {
 	reference front() { return myArray.front(); }
 
 	const_reference front() const {
-		return const_reference { myArray.front() };
+		return myArray.front();
 	}
 
 	reference back() { return myArray.back(); }
 
 	const_reference back() const {
-		return const_reference { myArray.back() };
+		return myArray.back();
 	}
 
 	//Iterators
